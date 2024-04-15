@@ -2,6 +2,7 @@ const interval = 50;
 const placeholders = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
     'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's',
     'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
+let numArray = [];
 let num;
 let blurb;
 let encrypted;
@@ -10,6 +11,7 @@ let running;
 document.addEventListener("DOMContentLoaded", function() {
     blurb = "";
     running = false;
+    setNumArray(blurbs);
 });
 
 document.getElementById("remember").addEventListener("click", async function () {
@@ -27,16 +29,28 @@ document.getElementById("remember").addEventListener("click", async function () 
     }
 });
 
-function waitForMs(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms))
+
+function setNumArray(list) {
+    if (numArray.length === 0) {
+        for (let i = 0; i < list.length; i++) {
+            numArray.push(i);
+        }
+    }
 }
 
 function getNumber() {
-    return Math.floor(Math.random() * blurbs.length);
+    setNumArray(blurbs);
+    let r = numArray[Math.floor(Math.random() * numArray.length)];
+    numArray = numArray.filter(e => e !== r);
+    return r;
 }
 
 function getBlurb(num) {
     return blurbs[num];
+}
+
+function waitForMs(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 function encrypt(original) {
@@ -60,8 +74,6 @@ function decrypt(original, encrypted){
     }
     return encrypted.join('');
 }
-
-
 
 async function type(text) {
     document.getElementById("blurb").innerHTML = "";
