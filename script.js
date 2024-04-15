@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 document.getElementById("remember").addEventListener("click", async function () {
     if(!running) {
+        await fetchBlurbs();
         running = true;
         document.getElementById("remember").style.color = '#818589';
         await backspace(blurb);
@@ -73,6 +74,12 @@ function decrypt(original, encrypted){
         }
     }
     return encrypted.join('');
+}
+
+async function fetchBlurbs() {
+    const response = await fetch('msvanausdal.github.io/remember-json');
+    const blurbs = await response.json();
+    console.log(blurbs);
 }
 
 async function type(text) {
