@@ -99,7 +99,7 @@ async function fetchData(url) {
         console.log("JSON Fetch Success", blurbsJson);
         blurbsJson.blurbs.forEach(blurbObj => {
             dates[blurbObj.id] = blurbObj.date;
-            blurbs[blurbObj.id] = blurbObj.blurb;
+            blurbs[blurbObj.id] = blurbObj.blurb.toLowerCase();
         });
     } catch (e) {
         console.error("JSON Fetch Failed", e);
