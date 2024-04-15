@@ -40,12 +40,12 @@ button{
     height: 5vh;
     text-align: center;
     font-size: 3em;
-    padding: 5px;
+    padding: 15px;
 }
 
 #blurb{
     height: 45vh;
     text-align: left;
     font-size: 1.5em;
-    padding: 15px;
+    padding: 5px;
 }
