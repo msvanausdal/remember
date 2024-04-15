@@ -1,40 +1,36 @@
-const interval = 50;
+const INTERVAL = 50;
 const placeholdersAll = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
     'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's',
     'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
 const placeholdersDate = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 let numArray = [];
 let num;
-let date
+let date = "";
 let dates = [];
-let blurb;
+let blurb = "";
 let blurbs = [];
 let encryptedDate;
 let encrypted;
-let running;
+let running = false;
 
-document.addEventListener("DOMContentLoaded", function() {
-    date = "";
-    blurb = "";
-    running = false;
-    setNumArray(blurbs);
+document.addEventListener("DOMContentLoaded", async function () {
+    await fetchData("https://msvanausdal.github.io/remember-json/data.json");
 });
 
 document.getElementById("remember").addEventListener("click", async function () {
     if(!running) {
-        await fetchData("https://msvanausdal.github.io/remember-json/data.json");
         running = true;
         document.getElementById("remember").style.color = '#818589';
         await backspace(blurb, "blurb");
-        await backspace(date, "blurb")
+        await backspace(date, "date", INTERVAL * 10);
         num = getNumber();
         date = getDate(num);
         blurb = getBlurb(num);
         encryptedDate = encrypt(date, placeholdersDate);
         encrypted = encrypt(blurb, placeholdersAll);
-        await type(encryptedDate, "date");
+        await type(encryptedDate, "date", INTERVAL * 10);
         await type(encrypted, "blurb");
-        visualize(date, encryptedDate, placeholdersDate, "date");
+        visualize(date, encryptedDate, placeholdersDate, "date", INTERVAL * 2);
         await visualize(blurb, encrypted, placeholdersAll, "blurb");
         document.getElementById("remember").style.color = '#03A062';
         running = false;
@@ -106,23 +102,25 @@ async function fetchData(url) {
     }
 }
 
-async function type(text, elementId) {
+async function type(text, elementId, interval = INTERVAL) {
     document.getElementById(elementId).innerHTML = "";
     for(let i = 0; i < text.length; i++) {
         document.getElementById(elementId).innerHTML += text[i];
         await waitForMs(interval/10);
     }
+    await waitForMs(interval);
 }
 
-async function backspace(text, elementId) {
+async function backspace(text, elementId, interval = INTERVAL) {
     for(let i = text.length - 1; i >= 0; i--) {
         text = text.slice(0, i);
         document.getElementById(elementId).innerHTML = text;
         await waitForMs(interval/10);
     }
+    await waitForMs(interval);
 }
 
-async function visualize(original, text, allowedChars, elementId) {
+async function visualize(original, text, allowedChars, elementId, interval = INTERVAL) {
     while(original !== text) {
         text = decrypt(original, text, allowedChars);
         document.getElementById(elementId).innerHTML = text;
