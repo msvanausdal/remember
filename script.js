@@ -5,6 +5,7 @@ const placeholders = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 let numArray = [];
 let num;
 let blurb;
+let blurbs = [];
 let encrypted;
 let running;
 
@@ -78,8 +79,16 @@ function decrypt(original, encrypted){
 
 async function fetchBlurbs() {
     const response = await fetch('https://msvanausdal.github.io/remember-json/data.json');
-    const blurbs = await response.json();
-    console.log(blurbs);
+    let blurbsJson;
+    try {
+        blurbsJson = await response.json();
+        console.log("JSON Fetch Success", blurbsJson);
+        blurbsJson.blurbs.forEach(blurbObj => {
+            blurbs[blurbObj.id] = blurbObj.blurb;
+        });
+    } catch (e) {
+        console.error("JSON Fetch Failed", e);
+    }
 }
 
 async function type(text) {
@@ -105,12 +114,3 @@ async function visualize(original, text) {
         await waitForMs(interval);
     }
 }
-
-const blurbs = [
-    "this is text number one, wow you are lucky you got the first one epic.",
-    "this is the second text. it is a bit longer than the first text, but it's still not the first text, you are unlucky.",
-    "this one is definitely also epic, even though its number three. how fun is that, very cool, i know.",
-    "i dont really know what to type at this point i just wanted the words to be legible so that you can really tell when the text is encrypted and not encrypted. this one is super epic long very cool very epic super cool.",
-    "wow this is the last one, number five. that's probably omega unlucky fr. i am completely out of ideas on what to type so now i am just typing.",
-    "jokes on you there was a sixth text, i forgot that i haven't yet tested it with this many. super cool. this one also has an apostrophe earlier, which probably wont be encrypted at all."
-]
