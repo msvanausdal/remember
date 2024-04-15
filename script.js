@@ -77,7 +77,7 @@ function decrypt(original, encrypted){
 }
 
 async function fetchBlurbs() {
-    const response = await fetch('msvanausdal.github.io/remember-json/data.json');
+    const response = await fetch('https://msvanausdal.github.io/remember-json/data.json');
     const blurbs = await response.json();
     console.log(blurbs);
 }
