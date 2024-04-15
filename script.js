@@ -15,14 +15,14 @@ document.addEventListener("DOMContentLoaded", function() {
 document.getElementById("remember").addEventListener("click", async function () {
     if(!running) {
         running = true;
-        //document.getElementById("remember").innerHTML.style.color = '#818589';
+        document.getElementById("remember").style.color = '#818589';
         await backspace(blurb);
         num = getNumber();
         blurb = getBlurb(num);
         encrypted = encrypt(blurb);
         await type(encrypted);
         await visualize(blurb, encrypted);
-        //document.getElementById("remember").innerHTML.style.color = '#03A062';
+        document.getElementById("remember").style.color = '#03A062';
         running = false;
     }
 });
