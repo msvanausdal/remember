@@ -3,28 +3,10 @@ html{
     overflow: hidden;
 }
 body {
-    background-color: #1a1a1a;
-    background: repeating-linear-gradient(#0d0d0d, #1a1a1a 2px, #0d0d0d 4px);
+    background: #1a1a1a repeating-linear-gradient(#0d0d0d, #1a1a1a 2px, #0d0d0d 4px);
     color: #03A062;
     font-family: monospace;
     height: 100%;
-}
-
-.buttons{
-    text-align: center;
-}
-
-button{
-    font-size: 40px;
-    font-family: monospace;
-    margin: 10px 0 10px 0;
-    border: 2px solid #03A062;
-    background-color: transparent;
-    color: #03A062;
-}
-
-#remember{
-    padding: 3px 5px;
 }
 
 #wrap {
@@ -48,4 +30,21 @@ button{
     text-align: left;
     font-size: 1.5em;
     padding: 5px;
+}
+
+.buttons{
+    text-align: center;
+}
+
+button{
+    font-size: 40px;
+    font-family: monospace;
+    margin: 10px 0 10px 0;
+    border: 2px solid #03A062;
+    background-color: transparent;
+    color: #03A062;
+}
+
+#remember{
+    padding: 3px 5px;
 }
