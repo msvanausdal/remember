@@ -210,6 +210,7 @@ async function visualize(original, text, allowedChars, elementId, interval = INT
         text = decrypt(original, text, allowedChars);
         document.getElementById(elementId).innerHTML = text;
         i++;
+        console.log(i);
         await waitForMs(interval);
     }
 }
