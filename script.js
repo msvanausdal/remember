@@ -3,7 +3,6 @@ const placeholdersAll = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
     'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's',
     'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
 const placeholdersDate = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-const question = ['?'];
 let numArray = [];
 let num;
 let date = "";
@@ -115,7 +114,7 @@ function waitForMs(ms) {
 function encrypt(original, allowedChars) {
     original = original.split('');
     for(let i = 0; i < original.length; i++){
-        if (allowedChars.includes(original[i]) || question.includes(original[i])){
+        if (allowedChars.includes(original[i])){
             original[i] = allowedChars[Math.floor(Math.random() * allowedChars.length)];
         }
     }
@@ -204,13 +203,9 @@ async function backspace(text, elementId, interval = INTERVAL) {
  * @returns {Promise<void>}
  */
 async function visualize(original, text, allowedChars, elementId, interval = INTERVAL) {
-    const counter = 50;
-    let i = 0;
-    while(original !== text || i < counter) {
+    while(original !== text) {
         text = decrypt(original, text, allowedChars);
         document.getElementById(elementId).innerHTML = text;
-        i++;
-        console.log(i);
         await waitForMs(interval);
     }
 }
