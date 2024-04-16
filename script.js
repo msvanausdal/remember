@@ -13,6 +13,9 @@ let encryptedDate;
 let encrypted;
 let running = false;
 
+/**
+ * Fetch JSON data on page load
+ */
 document.addEventListener("DOMContentLoaded", async function () {
     await fetchData("https://msvanausdal.github.io/remember-json/data.json");
 });
