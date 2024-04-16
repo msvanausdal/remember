@@ -53,6 +53,8 @@ function getNumber() {
     setNumArray(blurbs);
     let r = numArray[Math.floor(Math.random() * numArray.length)];
     numArray = numArray.filter(e => e !== r);
+    console.log(num);
+    console.log(numArray);
     return r;
 }
 
