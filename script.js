@@ -71,7 +71,9 @@ function waitForMs(ms) {
 function encrypt(original, allowedChars) {
     original = original.split('');
     for(let i = 0; i < original.length; i++){
-        if (allowedChars.includes(original[i])){
+        if(original[i] === '%'){
+            original[i] = '<br>'
+        }else if (allowedChars.includes(original[i])){
             original[i] = allowedChars[Math.floor(Math.random() * allowedChars.length)];
         }
     }
